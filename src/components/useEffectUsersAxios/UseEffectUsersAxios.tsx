@@ -1,7 +1,6 @@
 /* eslint-disable react-hooks/exhaustive-deps */
 import { useEffect, useState } from 'react'
 import axios from 'axios'
-import { UseStyles } from './UserStyles.ts'
 
 const useEffectUsersAxios = () => {
   const TRUE_URL = 'https://jsonplaceholder.typicode.com/users'
@@ -46,22 +45,23 @@ const useEffectUsersAxios = () => {
   }, [])
 
   const renderUsers = () => {
-    const classes = UseStyles()
     return users?.map((user) => {
       const { id, name, email, phone, website } = user
       return (
-        <li key={id} className={classes.list}>
-          <div className={classes.item}>
-            <p className={classes.title}>Name: {name}</p>
-            <p className={classes.text}>Email: {email}</p>
-            <p className={classes.text}>Phone: {phone}</p>
-            <p className={classes.text}>Website: {website}</p>
+        <li key={id} className="list-group-item">
+          <div className="card-body">
+            <h5 className="card-title">{name}</h5>
+            <p className="card-text">{email}</p>
+            <p className="card-text">{phone}</p>
+            <p className="card-text">{website}</p>
           </div>
         </li>
       )
     })
   }
 
+  const item = document.getElementsByClassName('list-group-item')
+  console.dir(item[0])
   return (
     <div>
       <h1>Use Axios</h1>
