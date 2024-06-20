@@ -29,14 +29,8 @@ const useEffectUsersAxios = () => {
 
   useEffect(() => {
     const fetchDataEndHandleLoading = async () => {
-      try {
-        const data = await fetchData()
-        setUsers(data)
-      } catch (error) {
-        if (error instanceof Error) {
-          setError(error.message)
-        }
-      }
+      const data = await fetchData()
+      setUsers(data)
     }
     fetchDataEndHandleLoading()
   }, [])
@@ -57,8 +51,6 @@ const useEffectUsersAxios = () => {
     })
   }
 
-  const item = document.getElementsByClassName('list-group-item')
-  console.dir(item[0])
   return (
     <div>
       <h1>Use Axios</h1>
