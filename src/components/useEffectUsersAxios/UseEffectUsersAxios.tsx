@@ -3,10 +3,6 @@ import { useEffect, useState } from 'react'
 import axios from 'axios'
 
 const useEffectUsersAxios = () => {
-  const TRUE_URL = 'https://jsonplaceholder.typicode.com/users'
-  const FALSE_URL = 'https://jsonplaceholder.typicode.com/wrongURL'
-  const URL = Math.random() >= 0.5 ? TRUE_URL : FALSE_URL
-
   interface User { id: number, name: string, email: string, phone: string, website: string }
 
   const [users, setUsers] = useState<User[]>([])
@@ -14,6 +10,10 @@ const useEffectUsersAxios = () => {
   const [isLoading, setIsLoading] = useState<boolean>(false)
 
   const fetchData = async () => {
+    const TRUE_URL = 'https://jsonplaceholder.typicode.com/users'
+    const FALSE_URL = 'https://jsonplaceholder.typicode.com/wrongURL'
+    const URL = Math.random() >= 0.5 ? TRUE_URL : FALSE_URL
+
     try {
       setIsLoading(true)
       const { data } = await axios.get(URL)
@@ -29,7 +29,6 @@ const useEffectUsersAxios = () => {
 
   useEffect(() => {
     const fetchDataEndHandleLoading = async () => {
-      setIsLoading(true)
       try {
         const data = await fetchData()
         setUsers(data)
@@ -37,8 +36,6 @@ const useEffectUsersAxios = () => {
         if (error instanceof Error) {
           setError(error.message)
         }
-      } finally {
-        setIsLoading(false)
       }
     }
     fetchDataEndHandleLoading()
